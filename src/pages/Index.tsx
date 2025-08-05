@@ -1,73 +1,75 @@
-import { ContactForm } from "@/components/ContactForm";
+import { Header } from "@/components/Header";
+import { HeroSection } from "@/components/HeroSection";
+import { AICompatibilityDemo } from "@/components/AICompatibilityDemo";
+import { ServicesSection } from "@/components/ServicesSection";
+import { ContactSection } from "@/components/ContactSection";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Hero Section */}
-        <article className="text-center mb-16">
-          <header>
-            <h1 className="text-4xl font-bold mb-4 text-foreground">
-              BIM Bot Boost
-            </h1>
-            <h2 className="text-xl text-muted-foreground mb-8">
-              AI-Enhanced Building Information Modeling Services
+    <div className="min-h-screen bg-background">
+      <Header />
+      <HeroSection />
+      
+      <section id="ai-features" className="py-20 bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              AI Compatibility Features
             </h2>
-          </header>
-          
-          <section className="space-y-6">
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Professional BIM consulting services enhanced with artificial intelligence 
-              to streamline your AEC workflows and improve project outcomes.
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Explore how we've made BIM services compatible with AI bots, agents, and automated systems
             </p>
-          </section>
-        </article>
-
-        {/* Services Grid */}
-        <section className="mb-16" aria-labelledby="services-heading">
-          <h2 id="services-heading" className="text-2xl font-bold text-center mb-8">
-            Our Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <article className="p-6 bg-card rounded-lg border border-border">
-              <h3 className="font-semibold mb-2">3D BIM Modeling</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                Precise 3D modeling with AI-powered quality assurance
-              </p>
-              <div className="text-xs text-muted-foreground">
-                Starting at $0.50/sq ft
-              </div>
-            </article>
-            <article className="p-6 bg-card rounded-lg border border-border">
-              <h3 className="font-semibold mb-2">AI Automation</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                Automated clash detection and workflow optimization
-              </p>
-              <div className="text-xs text-muted-foreground">
-                $1,500 - $5,000 per project
-              </div>
-            </article>
-            <article className="p-6 bg-card rounded-lg border border-border">
-              <h3 className="font-semibold mb-2">BIM Consulting</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                Expert guidance on BIM implementation and AI integration
-              </p>
-              <div className="text-xs text-muted-foreground">
-                $150 - $250 per hour
-              </div>
-            </article>
           </div>
-        </section>
+          <AICompatibilityDemo />
+        </div>
+      </section>
 
-        {/* Contact Section */}
-        <section className="text-center" aria-labelledby="contact-heading">
-          <h2 id="contact-heading" className="text-2xl font-bold mb-8">
-            Get Started Today
-          </h2>
-          <ContactForm />
-        </section>
-      </div>
-    </main>
+      <ServicesSection />
+      <ContactSection />
+      
+      {/* Structured Data for AI */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "BimBoss AI-Enhanced Services",
+            "description": "AI-compatible BIM consulting and automation services",
+            "serviceType": "Building Information Modeling",
+            "areaServed": ["United States", "Canada", "United Kingdom"],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "AI-Enhanced BIM Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI-Enhanced BIM Modeling",
+                    "description": "3D modeling with AI-powered quality checks"
+                  }
+                },
+                {
+                  "@type": "Offer", 
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI Implementation Consulting",
+                    "description": "Help integrate AI bots with BIM workflows"
+                  }
+                }
+              ]
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+1-555-123-4567",
+              "contactType": "Customer Service",
+              "email": "ai@bimboss.com"
+            }
+          })
+        }}
+      />
+    </div>
   );
 };
 
