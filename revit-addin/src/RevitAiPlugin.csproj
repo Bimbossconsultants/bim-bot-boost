@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>RevitAiPlugin</AssemblyName>
+    <RootNamespace>RevitAiPlugin</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Platforms>x64</Platforms>
+    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <OutputType>Library</OutputType>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <REVIT_API_DIR Condition=" '$(REVIT_API_DIR)' == '' ">C:\\Program Files\\Autodesk\\Revit 2024</REVIT_API_DIR>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>$(REVIT_API_DIR)\\RevitAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(REVIT_API_DIR)\\RevitAPIUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Commands\\AnalyzeModelCommand.cs" />
+    <Compile Include="Services\\ModelExporter.cs" />
+    <Compile Include="Services\\AiClient.cs" />
+    <Compile Include="Services\\ModelUpdater.cs" />
+    <Compile Include="Util\\Logger.cs" />
+    <EmbeddedResource Include="RevitAiPlugin.addin.template" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="RevitAiPlugin.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="AfterBuild">
+    <Message Text="Built RevitAiPlugin to $(OutputPath)" Importance="high" />
+  </Target>
+</Project>
+
