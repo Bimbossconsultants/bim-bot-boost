@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace RevitAiPlugin.Services
 {
@@ -27,7 +27,7 @@ namespace RevitAiPlugin.Services
                 throw new InvalidOperationException($"Missing config at {cfgPath}");
             }
             var text = File.ReadAllText(cfgPath);
-            var cfg = JsonSerializer.Deserialize<PluginConfig>(text);
+            var cfg = JsonConvert.DeserializeObject<PluginConfig>(text);
             if (cfg == null || string.IsNullOrEmpty(cfg.AiServerUrl))
             {
                 throw new InvalidOperationException("Invalid config: AiServerUrl");
@@ -37,20 +37,17 @@ namespace RevitAiPlugin.Services
 
         public AiResponse AnalyzeModel(ExportedModel model)
         {
-            var json = JsonSerializer.Serialize(model, new JsonSerializerOptions
+            var json = JsonConvert.SerializeObject(model, new JsonSerializerSettings
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = false
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
+                Formatting = Formatting.None
             });
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = _http.PostAsync(_baseUrl + "/analyze", content).GetAwaiter().GetResult();
             response.EnsureSuccessStatusCode();
             var respText = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var ai = JsonSerializer.Deserialize<AiResponse>(respText, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            var ai = JsonConvert.DeserializeObject<AiResponse>(respText);
             if (ai == null) throw new InvalidOperationException("Empty AI response");
             return ai;
         }
