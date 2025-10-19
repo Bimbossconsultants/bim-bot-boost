@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>RevitAiPlugin</Name>
+    <Assembly>REPLACE_WITH_DLL_FULL_PATH\RevitAiPlugin.dll</Assembly>
+    <AddInId>8D83BDC1-86B0-4D58-8B34-3648E8618F4B</AddInId>
+    <FullClassName>RevitAiPlugin.Commands.AnalyzeModelCommand</FullClassName>
+    <VendorId>RAPG</VendorId>
+    <VendorDescription>Revit AI Plugin</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>RevitAiPluginApp</Name>
+    <Assembly>REPLACE_WITH_DLL_FULL_PATH\RevitAiPlugin.dll</Assembly>
+    <AddInId>5E6AD9C3-48D2-4B7C-9D96-7C2C9D17A1AF</AddInId>
+    <FullClassName>RevitAiPlugin.App</FullClassName>
+    <VendorId>RAPG</VendorId>
+    <VendorDescription>Revit AI Plugin App</VendorDescription>
+  </AddIn>
+</RevitAddIns>
+
